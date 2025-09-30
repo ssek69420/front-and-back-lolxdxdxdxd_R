@@ -1,3 +1,7 @@
+//this is copy pasted code from the previous assignment
+//will highlight what I've changed 
+//so I don't fucking forget about it
+
 const path = require("path");
 const { json } = require("stream/consumers");
 const bcryptjs = require("bcryptjs");
@@ -12,12 +16,12 @@ class userController {
     const hashPassword = await bcryptjs.hash(password, 10);
     //states type in a string and stuff
     //honestly no idea if this will work but here we go ig
-    let type = "client";
+    let type = "client"; //not a boolean anymore
 
     if(name == "Hulk Brasileiro"){      //does the admin process
                                         //cannot state how unsafe
                                         //this actually is
-    type = "admin";
+    type = "admin"; //works the same as in previous code
     }
     
     const user = await client.user.create({
@@ -25,13 +29,14 @@ class userController {
         name,
         email,
         password: hashPassword,
-        type
+        type //changed from isAdmin to "type". Again, from bool -> string
+             //what a brainfuck
       },
     });
 
     return res.json({ userId: user.id });
   }
-
+  //from here on out it's pretty much the same
   static async search(req, res) {
     const id = req.params.userId;
 
@@ -113,7 +118,8 @@ class userController {
 
     if(user.type == "admin"){ //if() statement if admin
         return res.json({
-            msg: "omg real admin :O"
+            msg: "omg real admin :O" //changed to retarded msg
+            //i'm running out of fucking patience (and will to live)
         })
     }
 
@@ -126,6 +132,7 @@ class userController {
     if (user.type == "client") {
       return res.json({
         msg: "You are a client. YOU SHALL NOT PASS!",
+      //^^^^ changed to more braindead msg
       });
     }
     next()
@@ -133,3 +140,4 @@ class userController {
 }
 
 module.exports = userController;
+//done, 3 hip hip oohas for me
