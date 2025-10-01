@@ -115,6 +115,12 @@ class userController {
         msg: "You're not logged in.",
       });
     }
+    
+    const user = await client.user.findUnique({
+      where: {
+        id: req.userId,
+      },
+    });
 
     if(user.type == "admin"){ //if() statement if admin
         return res.json({
@@ -123,11 +129,6 @@ class userController {
         })
     }
 
-    const user = await client.user.findUnique({
-      where: {
-        id: req.userId,
-      },
-    });
 
     if (user.type == "client") {
       return res.json({
