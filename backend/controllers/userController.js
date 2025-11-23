@@ -84,7 +84,7 @@ class userController {
       },
     });
     if (!user) {
-      return resjson({
+      return res.json({
         msg: "User not found.",
       });
     }
